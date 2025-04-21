@@ -22,64 +22,6 @@ const tracks = [
   },
 ];
 
-function Header({ isHidden }) {
-  return (
-    <header className={`header retro-header ${isHidden ? "hidden" : ""}`}>
-      <h1 className="header-title transition-text">SoundCloud Chronicles</h1>
-      <p className="header-description transition-text">
-        Beep Beep Boop Boop.
-      </p>
-    </header>
-  );
-}
-
-function TrackCard({ track, isVisible }) {
-  if (!track.cover) {
-    // Special rendering for the welcome frame
-    return (
-      <div className={`track-card retro-card transition-text ${isVisible ? "" : "hidden"}`}>
-        <h2 className="track-title retro-text transition-text">{track.title}</h2>
-        <p className="track-description retro-text transition-text">
-          Explore the music and enjoy the journey!
-        </p>
-        <div className="track-hashtags">
-          {track.hashtags.map((tag, i) => (
-            <span key={i} className="track-tag retro-text transition-text">
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  // Regular track rendering
-  return (
-    <div className={`track-card retro-card transition-text ${isVisible ? "" : "hidden"}`}>
-      <img src={track.cover} alt="Track cover" className="track-cover" />
-      <h2 className="track-title retro-text transition-text">{track.title}</h2>
-      <p className="track-duration retro-text transition-text">{track.duration}</p>
-      <div className="progress-bar">
-        <div className="progress"></div>
-      </div>
-      <div className="track-links">
-        {track.links.map((link, i) => (
-          <a key={i} href={link} className="track-link retro-button transition-text">
-            Listen
-          </a>
-        ))}
-      </div>
-      <div className="track-hashtags">
-        {track.hashtags.map((tag, i) => (
-          <span key={i} className="track-tag retro-text transition-text">
-            {tag}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export default function MusicPortfolio() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -138,15 +80,42 @@ export default function MusicPortfolio() {
           </button>
         )}
       </div>
-      {currentIndex > 0 && (
+      {currentIndex > 0 && tracks[currentIndex - 1]?.links[0] && (
         <div className="player-container">
           <SoundCloudPlayer
-            url={tracks[currentIndex - 1].links[0]}
+            url={tracks[currentIndex - 1].links[0]} // Ensure the URL is valid
             onPlay={onPlay}
             opts={{ visual: false }}
           />
         </div>
       )}
+    </div>
+  );
+}
+
+function TrackCard({ track, isVisible }) {
+  return (
+    <div className={`track-card retro-card transition-text ${isVisible ? "" : "hidden"}`}>
+      <img src={track.cover} alt="Track cover" className="track-cover" />
+      <h2 className="track-title retro-text transition-text">{track.title}</h2>
+      <p className="track-duration retro-text transition-text">{track.duration}</p>
+      <div className="progress-bar">
+        <div className="progress"></div>
+      </div>
+      <div className="track-links">
+        {track.links.map((link, i) => (
+          <a key={i} href={link} className="track-link retro-button transition-text">
+            Listen
+          </a>
+        ))}
+      </div>
+      <div className="track-hashtags">
+        {track.hashtags.map((tag, i) => (
+          <span key={i} className="track-tag retro-text transition-text">
+            {tag}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }

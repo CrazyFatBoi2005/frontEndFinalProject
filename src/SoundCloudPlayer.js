@@ -1,19 +1,20 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-const SoundCloudPlayer = ({ url, id, height, opts = {}, onPlay, onPause, onEnd }) => {
+const SoundCloudPlayer = ({ url, id, height, opts, onPlay, onPause, onEnd }) => {
   const iframeRef = useRef(null);
   const widgetRef = useRef(null);
 
+  // Load the SoundCloud Widget API and initialize the widget
   useEffect(() => {
     const loadWidget = () => {
       if (window.SC && window.SC.Widget) {
         widgetRef.current = window.SC.Widget(iframeRef.current);
 
         // Bind events
-        if (onPlay) widgetRef.current.bind(window.SC.Widget.Events.PLAY, onPlay);
-        if (onPause) widgetRef.current.bind(window.SC.Widget.Events.PAUSE, onPause);
-        if (onEnd) widgetRef.current.bind(window.SC.Widget.Events.FINISH, onEnd);
+        widgetRef.current.bind(window.SC.Widget.Events.PLAY, onPlay);
+        widgetRef.current.bind(window.SC.Widget.Events.PAUSE, onPause);
+        widgetRef.current.bind(window.SC.Widget.Events.FINISH, onEnd);
 
         // Load the track
         widgetRef.current.load(url, opts);
@@ -22,12 +23,14 @@ const SoundCloudPlayer = ({ url, id, height, opts = {}, onPlay, onPause, onEnd }
       }
     };
 
+    // Load the SoundCloud API script
     const script = document.createElement('script');
     script.src = 'https://w.soundcloud.com/player/api.js';
     script.onload = loadWidget;
     document.body.appendChild(script);
 
     return () => {
+      // Cleanup: Unbind events and remove the script
       if (widgetRef.current) {
         widgetRef.current.unbind(window.SC.Widget.Events.PLAY);
         widgetRef.current.unbind(window.SC.Widget.Events.PAUSE);
@@ -62,7 +65,7 @@ SoundCloudPlayer.propTypes = {
 
 SoundCloudPlayer.defaultProps = {
   id: 'react-sc-widget',
-  opts: {}, // Default value for opts
+  opts: {},
   onPlay: () => {},
   onPause: () => {},
   onEnd: () => {},

@@ -255,6 +255,8 @@ body {
   height: 100vh;
   text-align: center;
   background-color: #111;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .add-new-form {
@@ -263,6 +265,7 @@ body {
   gap: 15px;
   padding: 20px;
   border-radius: 12px;
+  margin-top: 20px;
 }
 
 .add-new-form label {
@@ -288,6 +291,14 @@ body {
   color: #666;
 }
 
+.add-new-form input {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
 .add-new-form button {
   background-color: #28a745;
   color: white;
@@ -298,8 +309,50 @@ body {
   cursor: pointer;
   width: 100%;
   font-family: "Arial", sans-serif;
+  padding: 10px 20px;
+  background-color: #007bff;
+  border-radius: 5px;
 }
 
 .add-new-form button:hover {
+  background-color: #218838;
+}
+
+.add-new-form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.track-info {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.track-info img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.track-info p {
+  margin: 5px 0;
+}
+
+.track-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.track-link:hover {
   background-color: #218838;
 }

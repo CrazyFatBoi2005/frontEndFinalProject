@@ -1,0 +1,16 @@
+[
+  {
+    "title": "internet horror",
+    "cover": "./img/Evil.jpg",
+    "duration": "1:16",
+    "links": ["https://soundcloud.com/crazysadboi/internet-horror-prod-by-greyrock-lindo"],
+    "hashtags": ["#hashtag", "#hashtag"]
+  },
+  {
+    "title": "#swaga",
+    "cover": "./img/swaga.jpg",
+    "duration": "1:37",
+    "links": ["https://soundcloud.com/crazysadboi/hashtag-swaga"],
+    "hashtags": ["#hashtag", "#hashtag"]
+  }
+]
