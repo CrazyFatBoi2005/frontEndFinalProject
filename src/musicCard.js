@@ -1,10 +1,9 @@
 import { useState } from "react";
 import React from "react";
 import "./styles.css";
-import SoundCloud from "react-soundcloud-widget";
+import SoundCloudPlayer from "./SoundCloudPlayer";
 import EvilCover from "./img/Evil.jpg";
 import SwagaCover from "./img/swaga.jpg";
-
 
 const tracks = [
   {
@@ -35,6 +34,26 @@ function Header({ isHidden }) {
 }
 
 function TrackCard({ track, isVisible }) {
+  if (!track.cover) {
+    // Special rendering for the welcome frame
+    return (
+      <div className={`track-card retro-card transition-text ${isVisible ? "" : "hidden"}`}>
+        <h2 className="track-title retro-text transition-text">{track.title}</h2>
+        <p className="track-description retro-text transition-text">
+          Explore the music and enjoy the journey!
+        </p>
+        <div className="track-hashtags">
+          {track.hashtags.map((tag, i) => (
+            <span key={i} className="track-tag retro-text transition-text">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // Regular track rendering
   return (
     <div className={`track-card retro-card transition-text ${isVisible ? "" : "hidden"}`}>
       <img src={track.cover} alt="Track cover" className="track-cover" />
@@ -66,7 +85,7 @@ export default function MusicPortfolio() {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   const changeTrack = (newIndex) => {
-    if (isTransitioning) return;
+    if (isTransitioning || newIndex < 0 || newIndex > tracks.length) return;
 
     setIsTransitioning(true);
     setTimeout(() => {
@@ -87,10 +106,24 @@ export default function MusicPortfolio() {
     }
   };
 
+  const onPlay = () => {
+    console.log("Track is playing!");
+  };
+
   return (
     <div className="music-portfolio retro-bg">
-      <Header isHidden={currentIndex !== 0} />
-      {currentIndex > 0 && (
+      {currentIndex === 0 ? (
+        <div className="welcome-frame">
+          <h1 className="header-title transition-text">Welcome to SoundCloud Chronicles</h1>
+          <p className="header-description transition-text">
+            Explore the music and enjoy the journey!
+          </p>
+          <div className="track-hashtags">
+            <span className="track-tag retro-text transition-text">#Welcome</span>
+            <span className="track-tag retro-text transition-text">#EnjoyTheMusic</span>
+          </div>
+        </div>
+      ) : (
         <TrackCard track={tracks[currentIndex - 1]} isVisible={!isTransitioning} />
       )}
       <div className="nav-buttons">
@@ -104,11 +137,16 @@ export default function MusicPortfolio() {
             ▶
           </button>
         )}
-              <SoundCloud
-        url={'https://soundcloud.com/sylvanesso/coffee'}
-        onPlay={this.onPlay}
-      />
       </div>
+      {currentIndex > 0 && (
+        <div className="player-container">
+          <SoundCloudPlayer
+            url={tracks[currentIndex - 1].links[0]}
+            onPlay={onPlay}
+            opts={{ visual: false }}
+          />
+        </div>
+      )}
     </div>
   );
 }
