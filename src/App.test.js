@@ -4,14 +4,14 @@ import MusicPortfolio from './musicCard';
 import SoundCloudPlayer from './SoundCloudPlayer';
 import MyVirtualizedList from './virualization';
 
-// Test for App.js
+// App.js
 test('renders learn react link', () => {
   render(<App />);
   const linkElement = screen.getByText(/learn react/i);
   expect(linkElement).toBeInTheDocument();
 });
 
-// Test for MusicPortfolio (musicCard.js)
+// MusicPortfolio
 test('renders welcome frame in MusicPortfolio', () => {
   render(<MusicPortfolio />);
   const welcomeText = screen.getByText(/Welcome to SoundCloud Chronicles/i);
@@ -21,12 +21,12 @@ test('renders welcome frame in MusicPortfolio', () => {
 test('renders track card when currentIndex > 0 in MusicPortfolio', () => {
   render(<MusicPortfolio />);
   const nextButton = screen.getByText('▶');
-  nextButton.click(); // Simulate clicking the next button
+  nextButton.click();
   const trackTitle = screen.getByText(/internet horror/i);
   expect(trackTitle).toBeInTheDocument();
 });
 
-// Test for SoundCloudPlayer (SoundCloudPlayer.js)
+// SoundCloudPlayer
 test('renders SoundCloudPlayer iframe with valid URL', () => {
   const url = 'https://soundcloud.com/crazysadboi/internet-horror-prod-by-greyrock-lindo';
   render(<SoundCloudPlayer url={url} />);
@@ -40,7 +40,7 @@ test('does not render SoundCloudPlayer iframe if no URL is provided', () => {
   expect(iframe).not.toBeInTheDocument();
 });
 
-// Test for MyVirtualizedList (virualization.js)
+// MusicLib
 test('renders virtualized list with items', () => {
   const items = Array.from({ length: 1000 }, (_, i) => `Item ${i + 1}`);
   render(<MyVirtualizedList items={items} />);
