@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 import MusicPortfolio from './musicCard';
 import SoundCloudPlayer from './SoundCloudPlayer';
-import MyVirtualizedList from './virualization';
+import MyVirtualizedList from './musicLibrary';
 
 // App.js
 test('renders learn react link', () => {

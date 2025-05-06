@@ -4,7 +4,7 @@ import MusicPortfolio from "./musicCard";
 import Navbar from "./navbar";
 import FeedbackPage from "./feedback";
 import AddNewForm from "./addNew";
-import MusicLib from "./virualization";
+import MusicLib from "./musicLibrary";
 
 
 function App() {
