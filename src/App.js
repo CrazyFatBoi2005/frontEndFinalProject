@@ -14,6 +14,7 @@ function App() {
       <Route path="/" element={<MusicPortfolio />} />
       <Route path="/feedback" element={<FeedbackPage />} />
       <Route path="/add-new" element={<AddNewForm />} />
+      <Route path="/virtualizedList" element={<VirtualizedList />} />
     </Routes>
   </Router>
   );
