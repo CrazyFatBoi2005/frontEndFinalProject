@@ -4,7 +4,7 @@ import MusicPortfolio from "./musicCard";
 import Navbar from "./navbar";
 import FeedbackPage from "./feedback";
 import AddNewForm from "./addNew";
-import VirtualizedList from "./virualization";
+import MusicLib from "./virualization";
 
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
       <Route path="/" element={<MusicPortfolio />} />
       <Route path="/feedback" element={<FeedbackPage />} />
       <Route path="/add-new" element={<AddNewForm />} />
-      <Route path="/virtualizedList" element={<VirtualizedList />} />
+      <Route path="/library" element={<MusicLib />} />
     </Routes>
   </Router>
   );

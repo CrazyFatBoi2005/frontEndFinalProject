@@ -14,8 +14,8 @@ function Navbar() {
       <Link to="/add-new">
         <button className="retro-button">Add New</button>
       </Link>
-      <Link to="/virtualizedList">
-        <button className="retro-button">Virtualized List</button>
+      <Link to="/library">
+        <button className="retro-button">MusicLib</button>
       </Link>
     </nav>
   );
